@@ -1,0 +1,74 @@
+@import '../../../../styles/customMediaQueries.css';
+
+.searchField {
+  background-color: var(--colorWhite);
+  padding: 6px;
+  margin: 12px;
+  border-color: var(--colorGrey800);
+  border-width: 1px;
+  border-style: solid;
+  color: var(--colorGrey500);
+}
+.searchContainer {
+  background-color: var(--colorWhite);
+  padding: 6px;
+  margin: 12px;
+  border-color: var(--colorGrey800);
+  border-width: 1px;
+  color: var(--colorGrey500);
+}
+
+.grid {
+  grid-area: grid;
+  display: grid;
+  justify-content: center;
+  align-content: start;
+  grid-auto-rows: auto;
+  grid-gap: 32px;
+}
+
+.gridCol1,
+.gridCol2,
+.gridCol3,
+.gridCol4 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 350px) {
+  .gridCol2,
+  .gridCol3,
+  .gridCol4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 600px) {
+  .gridCol3,
+  .gridCol4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (--viewportMedium) {
+  .gridCol4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (--viewportLarge) {
+  .gridCol1 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gridCol2 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .gridCol3 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .gridCol4 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}

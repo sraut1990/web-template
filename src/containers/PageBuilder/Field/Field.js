@@ -10,6 +10,7 @@ import { P } from '../Primitives/P';
 import { Text } from '../Primitives/Text';
 import { Code, CodeBlock } from '../Primitives/Code';
 import { Link, SocialMediaLink } from '../Primitives/Link';
+import { SearchCTA } from '../Primitives/SearchCTA/SearchCTA';
 import { MarkdownImage, FieldImage } from '../Primitives/Image';
 import { CustomAppearance } from '../Primitives/CustomAppearance';
 import { YoutubeEmbed } from '../Primitives/YoutubeEmbed';
@@ -26,6 +27,7 @@ import {
   exposeYoutubeProps,
   exposeOpenGraphData,
   exposeSocialMediaProps,
+  exposeSearchCtaProps,
 } from './Field.helpers';
 
 const TEXT_CONTENT = [
@@ -75,6 +77,7 @@ const defaultFieldComponents = {
   text: { component: Text, pickValidProps: exposeContentAsChildren, omitInvalidPropsWarning },
   externalButtonLink: { component: Link, pickValidProps: exposeLinkProps },
   internalButtonLink: { component: Link, pickValidProps: exposeLinkProps },
+  search: { component: SearchCTA, pickValidProps: exposeSearchCtaProps },
   socialMediaLink: { component: SocialMediaLink, pickValidProps: exposeSocialMediaProps },
   image: { component: FieldImage, pickValidProps: exposeImageProps },
   customAppearance: { component: CustomAppearance, pickValidProps: exposeCustomAppearanceProps },
@@ -268,14 +271,18 @@ const isEmpty = obj => Object.keys(obj).length === 0;
 const Field = props => {
   const { data, options: fieldOptions, ...propsFromParent } = props;
 
+  console.log({ props });
+
   // Check the data and pick valid props only
   const validPropsFromData = validProps(data, fieldOptions);
   const hasValidProps = validPropsFromData && !isEmpty(validPropsFromData);
+  console.log({ hasValidProps }, { validPropsFromData });
 
   // Config contains component, pickValidProps, and potentially also options.
   // E.g. markdown has options.components to override default elements
   const config = getFieldConfig(data, defaultFieldComponents, fieldOptions);
   const { component: Component, options = {} } = config || {};
+  console.log({ config });
 
   // Render the correct field component
   if (Component && hasValidProps) {
